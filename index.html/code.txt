@@ -1,0 +1,190 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>400 Records</title>
+
+<style>
+body{
+margin:0;
+font-family: Arial;
+background:black;
+color:white;
+}
+
+/* HEADER */
+header{
+text-align:center;
+padding:20px;
+border-bottom:1px solid #222;
+letter-spacing:5px;
+}
+header span{color:red;}
+
+/* COUNTDOWN */
+#drop{
+text-align:center;
+padding:30px;
+font-size:20px;
+color:red;
+}
+
+/* PRODUCTS */
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.product{
+background:#111;
+border:1px solid #222;
+padding:15px;
+position:relative;
+opacity:0.5;
+}
+
+.product img{
+width:100%;
+height:200px;
+object-fit:cover;
+}
+
+.price{
+color:red;
+}
+
+.btn{
+display:block;
+text-align:center;
+padding:10px;
+margin-top:10px;
+border:1px solid red;
+color:white;
+text-decoration:none;
+}
+
+.btn:hover{
+background:red;
+}
+
+/* LOCKED */
+.locked{
+opacity:0.4;
+pointer-events:none;
+}
+
+/* SOLD OUT */
+.sold{
+position:absolute;
+top:10px;
+right:10px;
+background:red;
+padding:5px 10px;
+font-size:12px;
+display:none;
+}
+
+.sold.show{
+display:block;
+}
+
+/* FOOTER */
+footer{
+text-align:center;
+padding:20px;
+color:#666;
+border-top:1px solid #222;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>400 <span>RECORDS</span></h1>
+</header>
+
+<div id="drop">
+DROP OPENS IN: <span id="timer"></span>
+</div>
+
+<!-- PRODUCTS -->
+<div class="products">
+
+<div class="product" id="p1">
+<div class="sold" id="s1">SOLD OUT</div>
+<img src="grinder1.jpg">
+<h3>Black Grinder</h3>
+<p class="price">$25</p>
+
+<a class="btn" href="https://cash.app/$400records">Pay Cash App</a>
+<a class="btn" href="YOUR_GOOGLE_FORM_LINK">Order Form</a>
+</div>
+
+<div class="product" id="p2">
+<div class="sold" id="s2">SOLD OUT</div>
+<img src="grinder2.jpg">
+<h3>Red Grinder</h3>
+<p class="price">$30</p>
+
+<a class="btn" href="https://cash.app/$400records">Pay Cash App</a>
+<a class="btn" href="YOUR_GOOGLE_FORM_LINK">Order Form</a>
+</div>
+
+<div class="product" id="p3">
+<div class="sold" id="s3">SOLD OUT</div>
+<img src="grinder3.jpg">
+<h3>Luxury Grinder</h3>
+<p class="price">$35</p>
+
+<a class="btn" href="https://cash.app/$400records">Pay Cash App</a>
+<a class="btn" href="YOUR_GOOGLE_FORM_LINK">Order Form</a>
+</div>
+
+</div>
+
+<footer>
+© 400 Records — Limited Drop
+</footer>
+
+<script>
+// 🔥 DROP TIMER (set launch time)
+let dropTime = new Date().getTime() + 60000; // 60 seconds
+
+let x = setInterval(function(){
+let now = new Date().getTime();
+let distance = dropTime - now;
+
+let seconds = Math.floor(distance / 1000);
+
+document.getElementById("timer").innerHTML = seconds + "s";
+
+if(distance < 0){
+clearInterval(x);
+document.getElementById("timer").innerHTML = "LIVE";
+
+// unlock products
+document.getElementById("p1").classList.add("active");
+document.getElementById("p2").classList.add("active");
+document.getElementById("p3").classList.add("active");
+
+document.querySelectorAll(".product").forEach(p=>{
+p.style.opacity = 1;
+p.style.pointerEvents = "auto";
+});
+}
+},1000);
+
+// fake sellout example
+setTimeout(()=>{
+document.getElementById("s2").classList.add("show");
+},90000);
+</script>
+
+</body>
+</html>
